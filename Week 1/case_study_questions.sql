@@ -42,7 +42,21 @@ LEFT JOIN menu AS m
 	USING(product_id)
 WHERE s.order_date IN (SELECT MIN(order_date)
 					   FROM sales
-					   GROUP BY customer_id)
+					   GROUP BY customer_id);
+					   
+-- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+SELECT 
+	m.product_name,
+	COUNT(s.product_id) AS sales
+FROM sales AS s
+LEFT JOIN menu AS m 
+	USING (product_id)
+GROUP BY product_name
+ORDER BY sales DESC; 
+
+-- 5. Which item was the most popular for each customer?
+
+
 
 					  
 
